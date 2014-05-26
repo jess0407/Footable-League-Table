@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('angularAppApp')
-  .controller('MainCtrl', function (_, $scope, $http, moment) {
+  .controller('MainCtrl', function (_, $scope, $http, moment, $document) {
   	//reading data from supplied files.
   	$scope.teams = null;
   	$scope.matches = null;
   	$scope.table =[];
   	$scope.day = -1;
+
+
   	$scope.prev = function(){
   		if(($scope.day-1)>=0){
   			$scope.day-=1;
   			$scope.generateTable($scope.dates[$scope.day], $scope.teams,$scope.matches);
   			$scope.getMatchesOnDate($scope.matches,$scope.dates[$scope.day]);
 
-  		}else{
-  			console.log('this is already the first day!');
   		}
   	};
   	$scope.next = function(){
@@ -27,10 +27,21 @@ angular.module('angularAppApp')
   			$scope.day+=1;
   			$scope.generateTable($scope.dates[$scope.day], $scope.teams,$scope.matches);
   			$scope.getMatchesOnDate($scope.matches,$scope.dates[$scope.day]);
-  		}else{
-  			console.log('this is already the last day!');
   		}
   	};
+
+
+  	$document.keydown(function(e){
+  		if(e.keyCode===39){
+  			angular.element('#right').trigger('click');
+  			console.log($scope.day);
+  		}
+  		if(e.keyCode===37){
+  			angular.element('#left').trigger('click');
+  			console.log($scope.day);
+  		}
+  	
+  	});
   	//this will generate an array of object contains all the team statistics and thier position.
   	//it takes a moment date and a list of teams and will return the relevant data up to the date
   	$scope.generateTable=function(date, teams, matches){

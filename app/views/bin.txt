@@ -1,4 +1,6 @@
-.
+ng-click = 'generateTable(dates[day], teams, matches)'
+
+
   factory('Teams', function($http){
     var teams = null;
     function handle(data){

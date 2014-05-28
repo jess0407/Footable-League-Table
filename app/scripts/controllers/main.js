@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularAppApp')
-  .controller('MainCtrl', function (_, $scope, $http, moment, $document) {
+  .controller('MainCtrl', function (_, $scope, $http, moment, $document,d3) {
   	//reading data from supplied files.
   	$scope.teams = null;
   	$scope.matches = null;
@@ -19,7 +19,7 @@ angular.module('angularAppApp')
   	};
   	$scope.next = function(){
   		if($scope.day === -1){
-  			console.log('init');
+  			
   			angular.element('.wrap').removeClass('hide');
   			angular.element('.welcome').slideUp('slow');
   		}
@@ -34,11 +34,11 @@ angular.module('angularAppApp')
   	$document.keydown(function(e){
   		if(e.keyCode===39){
   			angular.element('#right').trigger('click');
-  			console.log($scope.day);
+  			
   		}
   		if(e.keyCode===37){
   			angular.element('#left').trigger('click');
-  			console.log($scope.day);
+  			
   		}
   	
   	});

@@ -7,7 +7,8 @@ angular
     'ngSanitize',
     'ngRoute',
     'underscore',
-    'moment'
+    'moment',
+    'd3'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,5 +28,9 @@ angular.module('underscore', [])
 });
 angular.module('moment', [])
 .factory('moment', function() {
+  return window.moment;
+});
+angular.module('d3', [])
+.factory('d3', function() {
   return window.moment;
 });

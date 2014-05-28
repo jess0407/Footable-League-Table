@@ -6,6 +6,10 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
+.canvas{
+    color: pink;
+}
+
 .datePicker{
     margin-left: 30%;
 }

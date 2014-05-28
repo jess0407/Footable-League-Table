@@ -36,5 +36,5 @@ angular.module('moment', [])
 });
 angular.module('d3', [])
 .factory('d3', function() {
-  return window.moment;
+  return window.d3;
 });

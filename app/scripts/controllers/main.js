@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularAppApp')
-  .controller('MainCtrl', function (_, $scope, $http, moment, $document,d3, Footballdata) {
+  .controller('MainCtrl', function ( $scope, $document,Footballdata) {
     //data publish to dom are [day, teams, matches, table, res (result on day)]
 
     //initilize the app, reading data from Footballdata service.
@@ -14,8 +14,7 @@ angular.module('angularAppApp')
       $scope.matches = Footballdata.matches;
       $scope.teams = Footballdata.teams;
       
-      //console.log('from mainview init'+$scope.teams);
-
+     
     };
     //listen to key event
     $document.keydown(function(e){
@@ -48,7 +47,7 @@ angular.module('angularAppApp')
   			$scope.day+=1;
   		  $scope.table = Footballdata.getTable($scope.dates[$scope.day]);
         $scope.res = Footballdata.getResults($scope.dates[$scope.day]);
-        console.log('next called');
+        
   		}
   	};
 

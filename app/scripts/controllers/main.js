@@ -2,9 +2,10 @@
 
 angular.module('angularAppApp')
   .controller('MainCtrl', function (_, $scope, $http, moment, $document,d3, Footballdata) {
-  	//reading data from supplied files.
     //data publish to dom are [day, teams, matches, table, res (result on day)]
 
+    //initilize the app, reading data from Footballdata service.
+   
   	$scope.day = -1;
 
     var init = function(){
@@ -77,14 +78,14 @@ angular.module('angularAppApp')
   		$scope.table = table;
   		
   	};
-  	//matches of the day
+  	//filter matches on a date
   	$scope.getMatchesOnDate = function(matches,date){
   		$scope.res = _.filter (matches, function(match){		
   				return match.date.isSame(date);
   		});
   		
   	};  	
-  	//aggregated matches
+  	//filter matches by a date
   	$scope.filterMatchByDate = function(matches,date){
   		return _.filter (matches, function(match){
   				return match.date.isSame(date)||match.date.isBefore(date); 	

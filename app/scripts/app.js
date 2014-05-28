@@ -16,6 +16,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/d3visual', {
+        templateUrl: 'views/d3visual.html',
+        controller: 'D3visualCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

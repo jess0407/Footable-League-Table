@@ -1,14 +1,29 @@
 'use strict';
 
 angular.module('angularAppApp')
-  .controller('MainCtrl', function (_, $scope, $http, moment, $document,d3) {
+  .controller('MainCtrl', function (_, $scope, $http, moment, $document,d3, Footballdata) {
   	//reading data from supplied files.
-  	$scope.teams = null;
-  	$scope.matches = null;
-  	$scope.table =[];
+    //data publish to dom are [day, teams, matches, table, res (result on day)]
+
   	$scope.day = -1;
 
+    var init = function(){
+      //pluck out array of unique match dates, and make them moment objects.
+      var dates = _.uniq(_.pluck(Footballdata.matches, 'date'));
+      $scope.dates = _.map(dates, function(date){
+          return moment(date, 'DD/MM/YY');
+      });
+      // turn date value to moment object.
+      $scope.matches = _.map(Footballdata.matches, function(obj){
+        obj.date = moment(obj.date,'DD/MM/YY');
+        return obj;
+      });
 
+      $scope.teams = Footballdata.teams;
+
+    };
+    
+   
   	$scope.prev = function(){
   		if(($scope.day-1)>=0){
   			$scope.day-=1;
@@ -19,7 +34,8 @@ angular.module('angularAppApp')
   	};
   	$scope.next = function(){
   		if($scope.day === -1){
-  			
+  		  //console.log($scope.matches);
+        init();
   			angular.element('.wrap').removeClass('hide');
   			angular.element('.welcome').slideUp('slow');
   		}
@@ -130,32 +146,6 @@ angular.module('angularAppApp')
   					Pts:pts
   				}; 
 		};
-
- 
-  	$scope.dataHandle = function(d){
-  		//pluck out array of unique match dates, and make them moment objects.
-  		var dates = _.uniq(_.pluck(d, 'date'));
-  		$scope.dates = _.map(dates, function(date){
-  			return moment(date, 'DD/MM/YY');
-  		});
-  		// turn date value to moment object.
-  		$scope.matches = _.map(d, function(obj){
-  			obj.date = moment(obj.date,'DD/MM/YY');
-  			return obj;
-  		});
-  		
-  	};
-
-  //getting data from source
- 	$http.get('/data/teams.json').success(function(data) {
-   		$scope.teams = data;
-   		
-   	});
-	$http.get('/data/matches.json').success(function(data) {
-    	//$scope.matches = data;
-    	$scope.dataHandle(data);
-	});
-
 	
 
   });
